@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN SENAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+        
+    <div class="login-card">
+        <h2>Login</h2>
+        
+        <!-- O formulário agora vai disparar corretamente para o método POST do /login -->
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label>E-mail</label>
+                <!-- Dica: O valor digitado aqui vai chegar no Flask como request.form.get("email") -->
+                <input type="text" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="btn">Entrar</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 15px;">
+            <a href="{{ url_for('cadastro') }}">
+                <button type="button" class="btn" style="background-color: #6c757d;">Cadastrar</button>
+            </a>
+        </div>
+    </div>
+        
+    <img id="logosenai" src="{{ url_for('static', filename='logosenai.jpg') }}" alt="Rodapé SENAI">
+
+</body>
+</html>

@@ -1,3 +1,6 @@
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+
 DROP DATABASE IF EXISTS almoxarifado;
 CREATE DATABASE almoxarifado;
 USE almoxarifado;
@@ -16,11 +19,10 @@ INSERT INTO produtos (nome, quantidade, foto) VALUES
 
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario VARCHAR(50) NOT NULL UNIQUE,
+    usuario VARCHAR(150) NOT NULL UNIQUE, -- Aumentado para suportar e-mails longos sem cortar texto
     senha_hash VARCHAR(255) NOT NULL
 );
 
--- HASH REAL E VALIDADO GERADO DIRETAMENTE VIA FLASK-BCRYPT PARA A SENHA: 1234
+-- Senha padrão gerada para ambos os e-mails: 1234
 INSERT INTO usuarios (usuario, senha_hash) VALUES 
-('admin', '$2b$12$7kPskB150A6yRE2h3M5DDe2Y06C3EexS7qO2YxV65YjD6EGeObeTq'),
-('vivi', '$2b$12$R9OaM1.oZ.26uN836nQZ/.3qXkM7yqK4Qo8p9mP6vW0V6B0vYqFBC');
+('admin@email.com', '$2b$12$Q6DYJnNAtw66tOCH3wGIdOCrIBaASDijqpYibpQRFVMFXqrg872dS')

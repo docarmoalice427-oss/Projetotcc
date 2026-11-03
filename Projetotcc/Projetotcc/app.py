@@ -1,10 +1,10 @@
 from flask import Flask, render_template, jsonify, request, redirect, session
-from flask_bcrypt import Bcrypt  
+from flask_bcrypt import Bcrypt 
 import mysql.connector
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
-app.secret_key = "172909_segredo_do_almoxarifado" # Necessário para rodar sessões com segurança
+app.secret_key = "172909_segredo_do_almoxarifado"
 
 def conectar_banco():
     return mysql.connector.connect(
@@ -12,18 +12,19 @@ def conectar_banco():
         user="root",
         password="172909", 
         port=3306,
-        database="almoxarifado"
-    )
+        database="almoxarifado",
+        charset="utf8mb4",
+        collation="utf8mb4_unicode_ci" )
 
-############ VERIFICAÇÃO DE ACESSO (MIDDLEWARE SIMPLES)
+############ rota api para verificação de acesso
 @app.before_request
 def verificar_autenticacao():
-    # Bloqueia o acesso a rotas internas se não houver usuário logado na sessão
+
     rotas_protegidas = ["/home", "/estoque"]
     if request.path in rotas_protegidas and "usuario" not in session:
         return redirect("/")
 
-############ ROTAS NAVEGAÇÃO / AUTENTICAÇÃO
+############ rota api para navegaçao
 
 @app.route("/")
 def index():
@@ -34,7 +35,7 @@ def index():
 @app.route("/login", methods=["POST"])
 def login():
     usuario = request.form.get("email") or request.form.get("usuario")
-    senha = request.form.get("password")
+    senha = request.form.get("password") or request.form.get("senha")
 
     try:
         conexao = conectar_banco()
@@ -69,7 +70,7 @@ def estoque():
 def cadastro():
     if request.method == "POST":
         usuario = request.form.get("email") or request.form.get("usuario")
-        senha = request.form.get("password")
+        senha = request.form.get("password") or request.form.get("senha")
 
         if not usuario or not senha:
             return "Campos obrigatórios ausentes!", 400
@@ -91,10 +92,7 @@ def cadastro():
 
     return render_template("cadastro.html")
 
-
-########### ROTAS DE API (ESTOQUE)
-
-# Rota GET para listar os produtos nas tabelas do front-end
+########### rota api para estoque
 @app.route('/api/estoque', methods=['GET'])
 def listar_produtos():
     try:
@@ -142,7 +140,7 @@ def obter_item_estoque(id):
         conexao.close()
         
         if not item:
-         return jsonify({"sucesso": False, "erro": "Item não encontrado!"}), 404
+           return jsonify({"sucesso": False, "erro": "Item não encontrado!"}), 404
         return jsonify({"sucesso": True, "dados": item}), 200
     except Exception as e:
         return jsonify({"sucesso": False, "erro": str(e)}), 500

@@ -1,5 +1,4 @@
-/* Fundo cinza claro e fonte padrão */
-body {
+ body {
     background-color: #f2f2f2;
     font-family: Arial, sans-serif;
     display: flex;
@@ -17,7 +16,7 @@ body {
     margin-bottom: 20px;
 }
 
-/* Espaçamento dos campos */
+
 .form-group {
     margin-bottom: 15px;
 }
@@ -55,7 +54,7 @@ body {
     background-color: #001a3d;
 }
 
-/* Logo do SENAI no rodapé */
+/* Logo do SENAI */
 #logosenai {
     width: 90px;
     margin-top: 20px;
@@ -69,8 +68,7 @@ body {
 }
 
 
-/* Container Principal do Formulário de Cadastro */
-#form_container {
+ #form_container {
     background-color: #ffffff;
     width: 100%;
     max-width: 550px;
@@ -86,11 +84,11 @@ body {
 
 #form_title {
     font-size: 24px;
-    color: #002D62; /* Mesma cor azul do SENAI que você usa no login */
+    color: #002D62; 
     font-weight: bold;
 }
 
-/* Organização dos Inputs em Grid (2 Colunas) */
+
 #input_container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -98,13 +96,13 @@ body {
     margin-bottom: 20px;
 }
 
-/* Caixa de cada campo (Label + Input) */
+
 .input-box {
     display: flex;
     flex-direction: column;
 }
 
-/* Inputs de Texto, Email, Password e Data */
+
 .input-field input {
     width: 100%;
     padding: 8px;
@@ -114,15 +112,15 @@ body {
     font-size: 14px;
 }
 
-/* Efeito de foco quando clicar no campo */
+
 .input-field input:focus {
     outline: none;
     border-color: #002D62;
 }
 
-/* Container de seleção de tipo de usuário */
+
 .radio-container {
-    grid-column: span 2; /* Faz os botões de rádio ocuparem a largura total */
+    grid-column: span 2; 
     background-color: #f9f9f9;
     padding: 12px;
     border-radius: 4px;
@@ -142,7 +140,7 @@ body {
 }
 
 .radio-box input[type="radio"] {
-    accent-color: #002D62; /* Aplica o azul do SENAI na bolinha do rádio */
+    accent-color: #002D62;
     cursor: pointer;
 }
 
@@ -150,7 +148,7 @@ body {
 .btn-default {
     width: 100%;
     padding: 10px;
-    background-color: #002D62; /* Mantém a identidade visual do botão do login */
+    background-color: #002D62;
     color: white;
     border: none;
     border-radius: 4px;
@@ -164,7 +162,7 @@ body {
     background-color: #001a3d;
 }
 
-/* Ajuste responsivo para telas menores (celular) */
+
 @media (max-width: 500px) {
     #input_container {
         grid-template-columns: 1fr;

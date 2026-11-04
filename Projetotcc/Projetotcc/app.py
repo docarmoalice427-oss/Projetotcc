@@ -14,18 +14,17 @@ def conectar_banco():
         port=3306,
         database="almoxarifado",
         charset="utf8mb4",
-        collation="utf8mb4_unicode_ci" )
+        collation="utf8mb4_unicode_ci"
+    )
 
-############ rota api para verificação de acesso
+# Rota para verificação de acesso
 @app.before_request
 def verificar_autenticacao():
-
     rotas_protegidas = ["/home", "/estoque"]
     if request.path in rotas_protegidas and "usuario" not in session:
         return redirect("/")
 
-############ rota api para navegaçao
-
+# Rota para navegação
 @app.route("/")
 def index():
     if "usuario" in session:
@@ -92,7 +91,7 @@ def cadastro():
 
     return render_template("cadastro.html")
 
-########### rota api para estoque
+# Rotas de API para o estoque
 @app.route('/api/estoque', methods=['GET'])
 def listar_produtos():
     try:
@@ -140,7 +139,7 @@ def obter_item_estoque(id):
         conexao.close()
         
         if not item:
-           return jsonify({"sucesso": False, "erro": "Item não encontrado!"}), 404
+            return jsonify({"sucesso": False, "erro": "Item não encontrado!"}), 404
         return jsonify({"sucesso": True, "dados": item}), 200
     except Exception as e:
         return jsonify({"sucesso": False, "erro": str(e)}), 500

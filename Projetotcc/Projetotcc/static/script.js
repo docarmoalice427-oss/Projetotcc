@@ -11,20 +11,17 @@ async function adicionarProduto() {
     try {
         const resposta = await fetch('/api/estoque', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nome, quantidade, foto })
         });
 
         const resultado = await resposta.json();
+
         if (resultado.sucesso) {
             alert(resultado.mensagem);
-            // Limpa os campos
             document.getElementById("nomeProduto").value = "";
             document.getElementById("quantidadeProduto").value = "";
             document.getElementById("linkFoto").value = "";
-            // Recarrega a tabela se estiver na página
             carregarProdutos();
         } else {
             alert("Erro ao cadastrar: " + resultado.erro);
@@ -41,8 +38,8 @@ async function carregarProdutos() {
 
         if (resultado.sucesso) {
             const produtos = resultado.dados;
-
             const tabelaHome = document.querySelector("#tabela-linda tbody");
+
             if (tabelaHome) {
                 tabelaHome.innerHTML = "";
                 produtos.forEach(p => {
@@ -50,8 +47,6 @@ async function carregarProdutos() {
                         <tr>
                             <td>${p.nome}</td>
                             <td>${p.quantidade}</td>
-                            <td>-</td>
-                            <td>-</td>
                             <td><img src="${p.foto || ''}" width="50" style="border-radius: 5px;" onerror="this.style.display='none'"></td>
                         </tr>
                     `;
@@ -59,6 +54,7 @@ async function carregarProdutos() {
             }
 
             const tabelaEstoque = document.getElementById("tabelaProdutos");
+
             if (tabelaEstoque) {
                 tabelaEstoque.innerHTML = "";
                 produtos.forEach(p => {
@@ -79,13 +75,13 @@ async function carregarProdutos() {
     }
 }
 
-// Deletar produto
 async function deletarProduto(id) {
     if (!confirm("Tem certeza que deseja remover este item?")) return;
 
     try {
         const resposta = await fetch(`/api/estoque/${id}`, { method: 'DELETE' });
         const resultado = await resposta.json();
+
         if (resultado.sucesso) {
             carregarProdutos();
         } else {

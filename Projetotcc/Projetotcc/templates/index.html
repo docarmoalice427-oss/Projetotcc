@@ -10,12 +10,11 @@
         
     <div class="login-card">
         <h2>Login</h2>
-        
-        <!-- O formulário agora vai disparar corretamente para o método POST do /login -->
+    
         <form action="/login" method="POST">
             <div class="form-group">
                 <label>E-mail</label>
-                <!-- Dica: O valor digitado aqui vai chegar no Flask como request.form.get("email") -->
+    
                 <input type="text" name="email" required>
             </div>
             

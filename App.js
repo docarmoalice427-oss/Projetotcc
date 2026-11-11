@@ -31,8 +31,7 @@ export default function App() {
       'Campos preenchidos com sucesso! A autenticação ainda precisa ser configurada.'
     );
 
-    // Não registre a senha no console.
-    console.log('E-mail informado:', email.trim());
+  console.log('E-mail informado:', email.trim());
   };
 
   return (
